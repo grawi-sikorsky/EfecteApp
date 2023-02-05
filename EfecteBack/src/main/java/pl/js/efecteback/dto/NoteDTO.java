@@ -1,33 +1,20 @@
-package pl.js.efecteback.model;
+package pl.js.efecteback.dto;
 
-import jakarta.persistence.*;
-
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-@Entity
-@Table(name = "notes")
-public class NoteModel {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class NoteDTO {
 	private Long id;
-	@Column(length = 100)
+
 	private String title;
-	@Column(length = 200)
+
 	private String content;
 
 	private ZonedDateTime date;
 
-	@PrePersist
-	public void prepersist() {
-		this.date = ZonedDateTime.now(ZoneId.of("Europe/Warsaw"));
+	public NoteDTO() {
 	}
 
-	public NoteModel() {
-	}
-
-	public NoteModel(Long id, String title, String content, ZonedDateTime date) {
+	public NoteDTO(Long id, String title, String content, ZonedDateTime date) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
