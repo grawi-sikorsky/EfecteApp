@@ -1,14 +1,13 @@
 package pl.js.efecteback.model;
 
-import lombok.Builder;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.ZonedDateTime;
 
-@Getter
 @Setter
+@Getter
 @Entity
 public class NoteModel {
 

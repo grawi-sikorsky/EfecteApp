@@ -2,9 +2,9 @@ spring:
   liquibase:
     change-log: classpath:/database/liquibaseChangelog.xml
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    username: ${DB_USER}
-    password: ${DB_PASS}
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
     url: jdbc:mysql://localhost:3306/efectenotes?createDatabaseIfNotExist=true
 
   jpa:

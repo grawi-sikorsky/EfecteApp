@@ -7,7 +7,7 @@ import pl.js.efecteback.model.NoteModel;
 import java.util.List;
 
 @Repository
-public interface NotesRepository extends CrudRepository<NoteModel,Long>{
+public interface NotesRepository extends CrudRepository<NoteModel, Long> {
 	NoteModel findNoteModelById(Long id);
 	List<NoteModel> findAll();
 }
