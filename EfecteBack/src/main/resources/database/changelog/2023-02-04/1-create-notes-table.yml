@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - preConditions:
+  - runningAs:
+  - changeSet:
+      id: 1
+      author: jsikora
+      changes:
+        - createTable:
+            tableName: notes
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(100)
+                  constraints:
+                    - nullable: false
+              - column:
+                  name: content
+                  type: varchar(200)
+                  constraints:
+                    - nullable: false
+              - column:
+                  name: date
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
