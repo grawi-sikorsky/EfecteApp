@@ -1,0 +1,21 @@
+<h2>PostIT Notes</h2>
+
+<button mat-raised-button color="primary" (click)="getAllNotes()"><mat-icon> check_circle </mat-icon> Get All Notes</button>
+
+<button mat-raised-button color="primary" (click)="getNote('2')"> Get Note</button>
+<button mat-raised-button color="primary" (click)="addNote()"><mat-icon> check_circle </mat-icon> Add Note</button>
+<button mat-raised-button color="primary" (click)="getNote('1')"><mat-icon> check_circle </mat-icon> Edit Note</button>
+<button mat-raised-button color="primary" (click)="getNote('3')"><mat-icon> check_circle </mat-icon> Remove Note</button>
+
+<div class="">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Actions Buttons</mat-card-title>
+      <mat-card-subtitle>Start</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -7,6 +7,11 @@ import pl.js.efecteback.mapper.NoteMapper;
 import pl.js.efecteback.model.NoteModel;
 import pl.js.efecteback.repositories.NotesRepository;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 public class NoteServiceImpl implements NoteService {
@@ -28,6 +33,15 @@ public class NoteServiceImpl implements NoteService {
 	@Override
 	public NoteDTO getNote(Long id) {
 		return noteMapper.mapToDTO(getNoteById(id));
+	}
+
+	@Override
+	public List<NoteDTO> getAllNotes() {
+		List<NoteDTO> noteList = new ArrayList<NoteDTO>();
+		noteList =  noteRepository.findAll().stream()
+				.map(note -> noteMapper.mapToDTO(note))
+				.collect(Collectors.toList());
+		return noteList;
 	}
 
 	@Override

@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import pl.js.efecteback.dto.NoteDTO;
 import pl.js.efecteback.services.NoteService;
 
+import java.util.List;
+
+@CrossOrigin(origins = {"http://localhost:4200", "*"})
 @RestController
 @RequestMapping("/notes")
 public class NoteController {
@@ -24,6 +27,11 @@ public class NoteController {
 	@GetMapping("{id}")
 	public ResponseEntity<NoteDTO> getNote(@PathVariable Long id) {
 		return ResponseEntity.status(HttpStatus.OK).body(noteService.getNote(id));
+	}
+
+	@GetMapping
+	public ResponseEntity<List<NoteDTO>> listAllNotes() {
+		return ResponseEntity.status(HttpStatus.OK).body(noteService.getAllNotes());
 	}
 
 	@PatchMapping("{id}")

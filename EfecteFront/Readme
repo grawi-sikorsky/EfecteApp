@@ -1,0 +1,5 @@
+1. To run in your local envirionment type:
+  - npm install
+
+  npm i @angular/material
+  npm i @angular/cdk

@@ -2,6 +2,8 @@ package pl.js.efecteback.services;
 
 import pl.js.efecteback.dto.NoteDTO;
 
+import java.util.List;
+
 
 public interface NoteService {
 
@@ -12,4 +14,6 @@ public interface NoteService {
 	NoteDTO modifyNote(Long id, NoteDTO noteToModify);
 
 	void removeNote(Long id);
+
+	List<NoteDTO> getAllNotes();
 }
