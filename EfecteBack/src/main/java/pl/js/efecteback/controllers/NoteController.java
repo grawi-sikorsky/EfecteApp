@@ -3,10 +3,8 @@ package pl.js.efecteback.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.service.annotation.DeleteExchange;
 import pl.js.efecteback.dto.NoteDTO;
 import pl.js.efecteback.services.NoteService;
-import pl.js.efecteback.services.NoteServiceImpl;
 
 @RestController
 @RequestMapping("/notes")
