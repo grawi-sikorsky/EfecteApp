@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, QueryList, ViewChildren} from '@angular/core';
 import {NoteService} from "../services/note.service";
 import {NoteDTO} from "../model/noteDTO";
 import {CreateNoteDTO} from "../model/createNoteDTO";
+import {NoteComponent} from "./note/note.component";
 
 @Component({
   selector: 'app-main',
@@ -9,24 +10,31 @@ import {CreateNoteDTO} from "../model/createNoteDTO";
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
+
+  @ViewChildren(NoteComponent) noteChildren!: QueryList<NoteComponent>;
+
   constructor(public noteService: NoteService) {
   }
 
   ngOnInit(): void {
+    this.getAllNotes();
   }
 
   testNote: CreateNoteDTO = {
-    title: "Note Title",
-    content: "Lorem ipsum costam costam. Lorem ipsum costam costam. Lorem ipsum costam costam."
+    title: "New Note Title",
+    content: "New Note Content. Lorem ipsum costam costam. Lorem ipsum costam costam. Lorem ipsum costam costam."
   };
   allNotes: NoteDTO[] = [];
-
+  allNotesChildren: NoteComponent[] = [];
+  newNoteToEdit:boolean = false;
   isEditMode: boolean = false;
   editingNoteId: number = 0;
 
   public getAllNotes() {
     this.noteService.getAllNotes().subscribe(data => {
       this.allNotes = data;
+      this.allNotesChildren = this.noteChildren.toArray();
+      console.log(this.allNotesChildren);
     });
   }
 
@@ -38,19 +46,6 @@ export class MainComponent {
 
   public addNote() {
     this.noteService.addNote(this.testNote).subscribe(data => {
-      console.log(data);
-    });
-  }
-
-  public editNote(note: NoteDTO) {
-    this.noteService.editNote(note).subscribe(data => {
-      console.log(data);
-    });
-  }
-
-  public deleteNote(note: NoteDTO) {
-    this.noteService.deleteNote(note).subscribe(data => {
-      this.enterEditMode(note);
       this.getAllNotes();
     });
   }

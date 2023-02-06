@@ -16,7 +16,8 @@
     - You can insert demo data running xyz.sql statement.
 
 2. If you like to open project in intellij or vscode you should add firstly created .env file in run configuration:
-    - intellij: Enable envFiles -> specify path to .env file
+    - intellij: Enable envFiles (plugin) -> specify path to .env file
+    - od specify environment variables
     - vscode -> create/modify "launch.json" and add line:
        "envFile": "${workspaceFolder}/docker/dev/.env"
 

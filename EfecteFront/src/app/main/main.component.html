@@ -1,26 +1,18 @@
-<div style="vertical-align: middle; text-align: center"><h2>PostIT Notes</h2></div>
-<button mat-raised-button color="primary" (click)="getAllNotes()">
-  <mat-icon> check_circle</mat-icon>
-  Get All Notes
-</button>
-<button mat-raised-button color="primary" (click)="getNote('2')"> Get Note</button>
-<button mat-raised-button color="primary" (click)="addNote()">
-  <mat-icon> check_circle</mat-icon>
-  Add Note
-</button>
-<button mat-raised-button color="primary" (click)="getNote('1')">
-  <mat-icon> check_circle</mat-icon>
-  Edit Note
-</button>
-<button mat-raised-button color="primary" (click)="getNote('3')">
-  <mat-icon> check_circle</mat-icon>
-  Remove Note
-</button>
+<div style="vertical-align: middle; text-align: center"><h2>PostIT Notes</h2>
+  <button class="note-button" mat-raised-button color="primary" (click)="getAllNotes()">
+    <mat-icon> check_circle</mat-icon>
+    Get All Notes
+  </button>
+  <button class="note-button" mat-raised-button color="primary" (click)="addNote()">
+    <mat-icon> check_circle</mat-icon>
+    Add Note
+  </button>
+</div>
 
 <div class="note-container">
 
-  <div class="" *ngFor="let note of this.allNotes">
-    <app-note [note]="note" (removedChildNote)="removeChildNote($event)"></app-note>
+  <div class="" *ngFor="let note of this.allNotes; let i = index">
+    <app-note [note]="note" (removedChildNote)="removeChildNote($event)" ></app-note>
   </div>
 
 </div>

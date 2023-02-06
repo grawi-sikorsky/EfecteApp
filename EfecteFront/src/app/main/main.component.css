@@ -1,7 +1,7 @@
 .note-container {
   margin: 40px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(1,1fr);
   /*grid-template-rows: 1fr 1fr 1fr 1fr;*/
   gap: 20px 20px;
   /*grid-template-areas:*/
@@ -9,4 +9,22 @@
   /*  ". . ."*/
   /*  ". . ."*/
   /*  ". . .";*/
+}
+@media (min-width: 640px) {
+  .note-container{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+@media (min-width: 920px) {
+  .note-container{
+    grid-template-columns: repeat(3,1fr);
+  }
+}
+@media (min-width: 1200px) {
+  .note-container{
+    grid-template-columns: repeat(4,1fr);
+  }
+}
+.note-button{
+  margin: 5px;
 }

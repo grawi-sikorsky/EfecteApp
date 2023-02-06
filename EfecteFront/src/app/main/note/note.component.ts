@@ -9,6 +9,7 @@ import {NoteDTO} from "../../model/noteDTO";
 })
 export class NoteComponent {
   @Input() note: NoteDTO = <NoteDTO>{};
+  @Input() goEdit:boolean=false;
   @Output() removedChildNote = new EventEmitter();
 
   constructor(public noteService: NoteService) {
