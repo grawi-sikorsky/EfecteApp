@@ -65,7 +65,13 @@ export class MainComponent {
     }
   }
 
-  isInEditMode(note: NoteDTO): boolean {
-    return this.isEditMode && this.editingNoteId === note.id;
+  removeChildNote(note: NoteDTO) {
+    //this.getAllNotes();
+    // or
+    // remove from allNotes
+    const index = this.allNotes.indexOf(note, 0);
+    if (index > -1) {
+      this.allNotes.splice(index, 1);
+    }
   }
 }

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NoteService} from "../../services/note.service";
 import {NoteDTO} from "../../model/noteDTO";
 
@@ -9,6 +9,7 @@ import {NoteDTO} from "../../model/noteDTO";
 })
 export class NoteComponent {
   @Input() note: NoteDTO = <NoteDTO>{};
+  @Output() removedChildNote = new EventEmitter();
 
   constructor(public noteService: NoteService) {
   }
@@ -42,7 +43,7 @@ export class NoteComponent {
   public deleteNote(note: NoteDTO) {
     this.noteService.deleteNote(note).subscribe(data => {
       this.enterEditMode(note);
-      this.noteService.getAllNotes();
+      this.removedChildNote.emit(note);
     });
   }
 }

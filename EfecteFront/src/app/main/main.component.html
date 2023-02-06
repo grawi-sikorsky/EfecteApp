@@ -20,7 +20,7 @@
 <div class="note-container">
 
   <div class="" *ngFor="let note of this.allNotes">
-    <app-note [note]="note"></app-note>
+    <app-note [note]="note" (removedChildNote)="removeChildNote($event)"></app-note>
   </div>
 
 </div>
