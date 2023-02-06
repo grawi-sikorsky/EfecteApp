@@ -26,8 +26,14 @@
       <button *ngIf="!this.isInEditMode(note)" mat-raised-button color="primary" (click)="enterEditMode(note)">EDIT
       </button>
       <button *ngIf="this.isInEditMode(note)" mat-raised-button (click)="enterEditMode(note)">Cancel</button>
-      <button *ngIf="this.isInEditMode(note)" mat-raised-button color="warn" (click)="deleteNote(note)" >Delete</button>
-      <button *ngIf="this.isInEditMode(note)" mat-raised-button color="primary" (click)="editNote(note)">Save</button>
+      <button *ngIf="this.isInEditMode(note)" mat-raised-button color="warn" (click)="deleteNote(note)" >
+<!--        <mat-icon>delete_forever</mat-icon>-->
+        Delete
+      </button>
+      <button *ngIf="this.isInEditMode(note)" mat-raised-button color="primary" (click)="editNote(note)">
+<!--        <mat-icon>save</mat-icon>-->
+        Save
+      </button>
     </div>
   </mat-card-actions>
 </mat-card>
