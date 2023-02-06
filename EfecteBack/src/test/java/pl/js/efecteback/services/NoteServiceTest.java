@@ -9,11 +9,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import pl.js.efecteback.dto.CreateModifyNoteDTO;
 import pl.js.efecteback.mapper.NoteMapper;
@@ -22,16 +24,14 @@ import pl.js.efecteback.repositories.NotesRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@ExtendWith(MockitoExtension.class)
+//@SpringBootTest
 class NoteServiceTest {
-
-    private NoteServiceImpl noteService;
     @Mock
     private NotesRepository notesRepository;
     @SpyBean
     private NoteMapper noteMapper;
-
+    @InjectMocks
+    private NoteServiceImpl noteService;
     private static final CreateModifyNoteDTO slimDTO = new CreateModifyNoteDTO("test title","test content");
 
     @BeforeEach
