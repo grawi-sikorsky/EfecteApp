@@ -1,0 +1,12 @@
+spring:
+  liquibase:
+    change-log: classpath:/database/liquibaseChangelog.xml
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: test
+    password: test
+    url: jdbc:mysql://localhost:3306/efectenotes?createDatabaseIfNotExist=true
+
+  jpa:
+    hibernate:
+      ddl-auto: update
