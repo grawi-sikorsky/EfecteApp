@@ -7,11 +7,13 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { MainComponent } from './main/main.component';
 import {FormsModule} from "@angular/forms";
 import {NoteService} from "./services/note.service";
+import { NoteComponent } from './main/note/note.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    NoteComponent
   ],
   imports: [
     HttpClientModule,

@@ -15,7 +15,7 @@ export class NoteService {
   }
 
   public getAllNotes() {
-    return this.http.get<NoteDTO>(this.API_URL + "/notes");
+    return this.http.get<NoteDTO[]>(this.API_URL + "/notes");
   }
   public getNote(id:string) {
     return this.http.get<NoteDTO>(this.API_URL + "/notes/" + id);
@@ -23,10 +23,10 @@ export class NoteService {
   public addNote(createNoteDTO:CreateNoteDTO) {
     return this.http.post<NoteDTO>(this.API_URL + "/notes/add", createNoteDTO);
   }
-  public editNote() {
-    return this.http.get<NoteDTO>(this.API_URL + "/notes/2");
+  public editNote(note:NoteDTO) {
+    return this.http.patch<NoteDTO>(this.API_URL + "/notes/" + note.id, note);
   }
-  public deleteNote() {
-    return this.http.get<NoteDTO>(this.API_URL + "/notes/2");
+  public deleteNote(note:NoteDTO) {
+    return this.http.delete<NoteDTO>(this.API_URL + "/notes/" + note.id);
   }
 }

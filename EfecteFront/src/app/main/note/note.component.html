@@ -1,0 +1,33 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+
+      <mat-form-field *ngIf="this.isInEditMode(note)" appearance="outline">
+        <mat-label>Note Title</mat-label>
+        <input matInput class="title-input" type="text" autocomplete="off" [value]="note.title"
+               [(ngModel)]="note.title">
+      </mat-form-field>
+      <section *ngIf="!this.isInEditMode(note)"> {{note.title}} </section>
+
+    </mat-card-title>
+
+    <mat-card-subtitle>{{note.date | date}}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-form-field *ngIf="this.isInEditMode(note)" appearance="outline">
+      <mat-label>Note Content</mat-label>
+      <textarea matInput class="content-input" cdkTextareaAutosize maxlength="200" [value]="note.content" [(ngModel)]="note.content"></textarea>
+    </mat-form-field>
+    <section class="content-input" *ngIf="!this.isInEditMode(note)">{{note.content}}</section>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="modify-buttons">
+      <button *ngIf="!this.isInEditMode(note)" mat-raised-button color="primary" (click)="enterEditMode(note)">EDIT
+      </button>
+      <button *ngIf="this.isInEditMode(note)" mat-raised-button (click)="enterEditMode(note)">Cancel</button>
+      <button *ngIf="this.isInEditMode(note)" mat-raised-button color="warn" (click)="deleteNote(note)">Delete</button>
+      <button *ngIf="this.isInEditMode(note)" mat-raised-button color="primary" (click)="editNote(note)">Save</button>
+    </div>
+  </mat-card-actions>
+</mat-card>
