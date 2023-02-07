@@ -24,23 +24,20 @@ export class MainComponent {
     title: "New Note Title",
     content: "New Note Content. Lorem ipsum costam costam. Lorem ipsum costam costam. Lorem ipsum costam costam."
   };
+
   allNotes: NoteDTO[] = [];
   allNotesChildren: NoteComponent[] = [];
-  newNoteToEdit:boolean = false;
-  isEditMode: boolean = false;
-  editingNoteId: number = 0;
+
 
   public getAllNotes() {
     this.noteService.getAllNotes().subscribe(data => {
       this.allNotes = data;
       this.allNotesChildren = this.noteChildren.toArray();
-      console.log(this.allNotesChildren);
     });
   }
 
   public getNote(id: string) {
     this.noteService.getNote(id).subscribe(data => {
-      console.log(data);
     });
   }
 
@@ -50,20 +47,7 @@ export class MainComponent {
     });
   }
 
-  enterEditMode(note: NoteDTO) {
-    if (this.isEditMode && this.editingNoteId === note.id) {
-      this.isEditMode = false;
-      this.editingNoteId = 0;
-    } else {
-      this.isEditMode = true;
-      this.editingNoteId = note.id;
-    }
-  }
-
   removeChildNote(note: NoteDTO) {
-    //this.getAllNotes();
-    // or
-    // remove from allNotes
     const index = this.allNotes.indexOf(note, 0);
     if (index > -1) {
       this.allNotes.splice(index, 1);

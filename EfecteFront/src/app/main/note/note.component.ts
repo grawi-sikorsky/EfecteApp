@@ -44,7 +44,6 @@ export class NoteComponent {
 
   public deleteNote(note: NoteDTO) {
     this.noteService.deleteNote(note).subscribe(data => {
-      this.enterEditMode(note);
       this.removedChildNote.emit(note);
     });
   }
