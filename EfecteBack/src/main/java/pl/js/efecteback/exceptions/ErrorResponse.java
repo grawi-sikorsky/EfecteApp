@@ -18,7 +18,7 @@ public final class ErrorResponse {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return timestamp.toString() + ": " + status + " " + error.toString() + ", path: " + path + "  " + message;
     }
 

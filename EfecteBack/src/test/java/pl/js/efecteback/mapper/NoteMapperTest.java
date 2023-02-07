@@ -14,7 +14,7 @@ import pl.js.efecteback.model.NoteModel;
 
 import java.time.ZonedDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class NoteMapperTest {
@@ -28,10 +28,10 @@ class NoteMapperTest {
 
         NoteDTO noteDTO = noteMapper.noteToNoteDTO(note);
 
-        assertEquals(note.getId(),noteDTO.getId());
-        assertEquals(note.getTitle(),noteDTO.getTitle());
+        assertEquals(note.getId(), noteDTO.getId());
+        assertEquals(note.getTitle(), noteDTO.getTitle());
         assertEquals(note.getContent(), noteDTO.getContent());
-        assertEquals(note.getDate(),noteDTO.getDate());
+        assertEquals(note.getDate(), noteDTO.getDate());
     }
 
     @Test
@@ -40,7 +40,7 @@ class NoteMapperTest {
 
         CreateModifyNoteDTO createDTO = noteMapper.noteToCreateModifyNoteDTO(note);
 
-        assertEquals(note.getTitle(),createDTO.getTitle());
+        assertEquals(note.getTitle(), createDTO.getTitle());
         assertEquals(note.getContent(), createDTO.getContent());
     }
 
@@ -50,10 +50,10 @@ class NoteMapperTest {
 
         NoteModel note = noteMapper.noteDtoToEntity(noteDTO);
 
-        assertEquals(note.getId(),noteDTO.getId());
-        assertEquals(note.getTitle(),noteDTO.getTitle());
+        assertEquals(note.getId(), noteDTO.getId());
+        assertEquals(note.getTitle(), noteDTO.getTitle());
         assertEquals(note.getContent(), noteDTO.getContent());
-        assertEquals(note.getDate(),noteDTO.getDate());
+        assertEquals(note.getDate(), noteDTO.getDate());
     }
 
     @Test
@@ -62,7 +62,7 @@ class NoteMapperTest {
 
         NoteModel note = noteMapper.createModifyNoteDtoToEntity(createModifyNoteDTO);
 
-        assertEquals(note.getTitle(),createModifyNoteDTO.getTitle());
+        assertEquals(note.getTitle(), createModifyNoteDTO.getTitle());
         assertEquals(note.getContent(), createModifyNoteDTO.getContent());
     }
 }

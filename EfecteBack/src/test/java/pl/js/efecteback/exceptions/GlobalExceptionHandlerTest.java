@@ -6,15 +6,15 @@
 package pl.js.efecteback.exceptions;
 
 import org.junit.jupiter.api.Test;
-import org.springdoc.api.OpenApiResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
-import static org.springframework.http.HttpStatus.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @SpringBootTest
 class GlobalExceptionHandlerTest {

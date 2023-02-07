@@ -1,7 +1,6 @@
 package pl.js.efecteback.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;

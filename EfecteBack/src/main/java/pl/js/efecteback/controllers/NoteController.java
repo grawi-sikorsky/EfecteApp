@@ -25,7 +25,7 @@ public class NoteController {
 
     @PostMapping("add")
     public ResponseEntity<NoteDTO> addNote(@RequestBody CreateModifyNoteDTO noteToAdd) {
-        return ResponseEntity.status(HttpStatus.OK).body(noteService.addNote(noteToAdd));
+        return ResponseEntity.status(HttpStatus.CREATED).body(noteService.addNote(noteToAdd));
     }
 
     @GetMapping("{id}")

@@ -13,7 +13,7 @@ import pl.js.efecteback.model.NoteModel;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 @Sql(scripts = "classpath:sql/insert-dummy-notes.sql")
@@ -33,7 +33,7 @@ class NotesRepositoryTest {
         NoteModel note2 = foundNotes.get(1);
 
         assertEquals(2, foundNotes.size());
-        assertEquals(1L, note1.getId());
-        assertEquals(2L, note2.getId());
+        assertEquals(10L, note1.getId());
+        assertEquals(20L, note2.getId());
     }
 }

@@ -8,11 +8,14 @@ import pl.js.efecteback.model.NoteModel;
 
 @Mapper(componentModel = "spring")
 public interface NoteMapper {
-	NoteMapper INSTANCE = Mappers.getMapper(NoteMapper.class);
+    NoteMapper INSTANCE = Mappers.getMapper(NoteMapper.class);
 
-	NoteDTO noteToNoteDTO(NoteModel note);
-	CreateModifyNoteDTO noteToCreateModifyNoteDTO(NoteModel note);
-	NoteModel noteDtoToEntity(NoteDTO noteDTO);
-	NoteModel createModifyNoteDtoToEntity(CreateModifyNoteDTO createModifyNoteDTO);
+    NoteDTO noteToNoteDTO(NoteModel note);
+
+    CreateModifyNoteDTO noteToCreateModifyNoteDTO(NoteModel note);
+
+    NoteModel noteDtoToEntity(NoteDTO noteDTO);
+
+    NoteModel createModifyNoteDtoToEntity(CreateModifyNoteDTO createModifyNoteDTO);
 
 }

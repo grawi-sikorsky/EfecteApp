@@ -111,6 +111,7 @@ class NoteServiceTest {
         assertEquals(testNote.getContent(), noteExpected.getContent());
         Mockito.verify(notesRepository, Mockito.times(1)).save(noteToModify);
     }
+
     @Test
     void modifyNote_should_throwException() {
         assertThrows(NoteNotFoundException.class, () -> noteService.getNote(666L));
@@ -120,6 +121,7 @@ class NoteServiceTest {
     void removeNote_should_throwExceptionOnBadID() {
         assertThrows(NoteNotFoundException.class, () -> noteService.removeNote(666L));
     }
+
     @Test
     void removeNote_should_removeNote() {
         Mockito.when(notesRepository.existsById(1L)).thenReturn(true);
