@@ -1,18 +1,17 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { AppComponent } from './app.component';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {AppComponent} from './app.component';
 import {MaterialModule} from "./material/material.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { MainComponent } from './main/main.component';
+import {NotesviewComponent} from './notesview/notesview.component';
 import {FormsModule} from "@angular/forms";
-import {NoteService} from "./services/note.service";
-import { NoteComponent } from './main/note/note.component';
+import {NoteComponent} from './notesview/note/note.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
+    NotesviewComponent,
     NoteComponent
   ],
   imports: [
@@ -25,4 +24,5 @@ import { NoteComponent } from './main/note/note.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

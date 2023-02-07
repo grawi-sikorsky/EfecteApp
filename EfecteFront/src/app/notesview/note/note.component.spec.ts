@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NoteComponent } from './note.component';
+import {HttpClientModule} from "@angular/common/http";
+import {MaterialModule} from "../../material/material.module";
 
 describe('NoteComponent', () => {
   let component: NoteComponent;
@@ -8,7 +10,11 @@ describe('NoteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NoteComponent ]
+      declarations: [ NoteComponent ],
+      imports: [
+        HttpClientModule,
+        MaterialModule
+      ]
     })
     .compileComponents();
 

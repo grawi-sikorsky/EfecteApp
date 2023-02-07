@@ -5,11 +5,11 @@ import {CreateNoteDTO} from "../model/createNoteDTO";
 import {NoteComponent} from "./note/note.component";
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  selector: 'app-notesview',
+  templateUrl: './notesview.component.html',
+  styleUrls: ['./notesview.component.css']
 })
-export class MainComponent {
+export class NotesviewComponent {
 
   @ViewChildren(NoteComponent) noteChildren!: QueryList<NoteComponent>;
 

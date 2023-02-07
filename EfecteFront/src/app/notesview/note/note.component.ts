@@ -29,6 +29,7 @@ export class NoteComponent {
     } else {
       this.isEditMode = true;
       this.editingNoteId = note.id;
+      this.getNote(note.id);
     }
   }
 
