@@ -2,6 +2,7 @@ package pl.js.efecteback.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.ZonedDateTime;
@@ -10,7 +11,7 @@ public class NoteDTO {
 	@Positive
 	private Long id;
 	@NotBlank(message = "Note title cannot be longer than 100 characters")
-	@Length(max = 100, message = "Note title cannot be longer than 100 characters")
+	@Size(min=1, max = 100, message = "Note title cannot be longer than 100 characters")
 	private String title;
 	@NotBlank(message = "Note content cannot be longer than 200 characters")
 	@Length(max = 100, message = "Note content cannot be longer than 200 characters")

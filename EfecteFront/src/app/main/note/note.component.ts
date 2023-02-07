@@ -25,6 +25,7 @@ export class NoteComponent {
     if (this.isEditMode && this.editingNoteId === note.id) {
       this.isEditMode = false;
       this.editingNoteId = 0;
+      this.getNote(note.id);
     } else {
       this.isEditMode = true;
       this.editingNoteId = note.id;
@@ -45,6 +46,12 @@ export class NoteComponent {
     this.noteService.deleteNote(note).subscribe(data => {
       this.enterEditMode(note);
       this.removedChildNote.emit(note);
+    });
+  }
+
+  public getNote(id:number){
+    this.noteService.getNote(id.toString()).subscribe( data => {
+        this.note = data;
     });
   }
 }

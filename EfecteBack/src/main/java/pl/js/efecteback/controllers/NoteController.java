@@ -1,7 +1,9 @@
 package pl.js.efecteback.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.js.efecteback.dto.CreateModifyNoteDTO;
 import pl.js.efecteback.dto.NoteDTO;
@@ -10,6 +12,7 @@ import pl.js.efecteback.services.NoteService;
 import java.util.List;
 
 @CrossOrigin(origins = {"http://localhost:4200", "*"})
+@Validated
 @RestController
 @RequestMapping("/notes")
 public class NoteController {
@@ -36,7 +39,7 @@ public class NoteController {
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<NoteDTO> updateNote(@PathVariable Long id, @RequestBody CreateModifyNoteDTO noteToModify) {
+    public ResponseEntity<NoteDTO> updateNote(@PathVariable Long id, @Valid @RequestBody CreateModifyNoteDTO noteToModify) {
         return ResponseEntity.status(HttpStatus.OK).body(noteService.modifyNote(id, noteToModify));
     }
 

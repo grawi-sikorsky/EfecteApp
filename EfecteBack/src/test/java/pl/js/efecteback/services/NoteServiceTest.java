@@ -8,31 +8,35 @@ package pl.js.efecteback.services;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import pl.js.efecteback.dto.CreateModifyNoteDTO;
+import pl.js.efecteback.dto.NoteDTO;
+import pl.js.efecteback.exceptions.NoteNotFoundException;
 import pl.js.efecteback.mapper.NoteMapper;
 import pl.js.efecteback.model.NoteModel;
 import pl.js.efecteback.repositories.NotesRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-//@SpringBootTest
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+@SpringBootTest
 class NoteServiceTest {
-    @Mock
+    @MockBean
     private NotesRepository notesRepository;
-    @SpyBean
+    @MockBean
     private NoteMapper noteMapper;
-    @InjectMocks
+    @Autowired
     private NoteServiceImpl noteService;
-    private static final CreateModifyNoteDTO slimDTO = new CreateModifyNoteDTO("test title","test content");
+    private static final CreateModifyNoteDTO slimDTO = new CreateModifyNoteDTO("a", "b");
 
     @BeforeEach
     void setUp() {
@@ -44,30 +48,83 @@ class NoteServiceTest {
 
     @Test
     void addNote_should_addNoteToDB() {
-        NoteModel note = noteMapper.createModifyNoteDtoToEntity(slimDTO);
+        NoteModel noteToAdd = new NoteModel(1L, "a", "b", ZonedDateTime.now());
+        NoteModel noteAfterSave = new NoteModel(1L, "a", "b", noteToAdd.getDate());
+
+        Mockito.doReturn(noteToAdd).when(noteMapper).createModifyNoteDtoToEntity(slimDTO);
+        Mockito.doReturn(noteAfterSave).when(notesRepository).save(noteToAdd);
+
         noteService.addNote(slimDTO);
-        Mockito.verify(notesRepository, Mockito.times(1)).save(note);
+        Mockito.verify(notesRepository, Mockito.times(1)).save(noteToAdd);
+        Mockito.verify(noteMapper).createModifyNoteDtoToEntity(slimDTO);
     }
 
     @Test
-    void addNote_should_throwError() {
-        noteService.addNote(slimDTO);
+    void getNote_should_returnNote() {
+        NoteDTO noteReturned = new NoteDTO(1L, "a", "b", ZonedDateTime.now());
+        NoteModel noteExpected = new NoteModel(1L, "a", "b", ZonedDateTime.now());
 
+        Mockito.when(notesRepository.findById(1L)).thenReturn(Optional.of(noteExpected));
+        Mockito.when(noteMapper.noteToNoteDTO(noteExpected)).thenReturn(noteReturned);
+
+        NoteDTO testNote = noteService.getNote(1L);
+
+        Mockito.verify(notesRepository, Mockito.times(1)).findById(1L);
+        Mockito.verify(noteMapper, Mockito.times(1)).noteToNoteDTO(noteExpected);
+        assertEquals(testNote, noteReturned);
     }
 
     @Test
-    void getNote() {
+    void getNote_should_shouldThrowException() {
+        assertThrows(NoteNotFoundException.class, () -> noteService.getNote(1L));
     }
 
     @Test
-    void modifyNote() {
+    void getAllNotes_should_returnListOfNotes() {
+        List<NoteModel> notesList = new ArrayList<>();
+        notesList.add(new NoteModel(1L, "a", "b", ZonedDateTime.now()));
+        notesList.add(new NoteModel(2L, "a", "b", ZonedDateTime.now()));
+
+        Mockito.when(notesRepository.findAll()).thenReturn(notesList);
+        List<NoteDTO> noteDTOS = notesList.stream()
+                .map(note -> noteMapper.noteToNoteDTO(note))
+                .collect(Collectors.toList());
+
+        List<NoteDTO> ex = noteService.getAllNotes();
+
+        assertEquals(ex, noteDTOS);
     }
 
     @Test
-    void removeNote() {
+    void modifyNote_should_changeValues() {
+        CreateModifyNoteDTO noteDTOToModify = new CreateModifyNoteDTO("change", "change");
+        NoteDTO noteExpected = new NoteDTO(1L, "change", "change", ZonedDateTime.now());
+        NoteModel noteToModify = new NoteModel(1L, "nochange", "nochange", noteExpected.getDate());
+
+        Mockito.when(notesRepository.findById(1L)).thenReturn(Optional.of(noteToModify));
+        Mockito.when(noteMapper.noteToNoteDTO(noteToModify)).thenReturn(noteExpected);
+        Mockito.when(notesRepository.save(noteToModify)).thenReturn(noteToModify);
+
+        NoteDTO testNote = noteService.modifyNote(1L, noteDTOToModify);
+
+        assertEquals(testNote.getTitle(), noteExpected.getTitle());
+        assertEquals(testNote.getContent(), noteExpected.getContent());
+        Mockito.verify(notesRepository, Mockito.times(1)).save(noteToModify);
+    }
+    @Test
+    void modifyNote_should_throwException() {
+        assertThrows(NoteNotFoundException.class, () -> noteService.getNote(666L));
     }
 
     @Test
-    void getAllNotes() {
+    void removeNote_should_throwExceptionOnBadID() {
+        assertThrows(NoteNotFoundException.class, () -> noteService.removeNote(666L));
+    }
+    @Test
+    void removeNote_should_removeNote() {
+        Mockito.when(notesRepository.existsById(1L)).thenReturn(true);
+        noteService.removeNote(1L);
+
+        Mockito.verify(notesRepository, Mockito.times(1)).deleteById(1L);
     }
 }
