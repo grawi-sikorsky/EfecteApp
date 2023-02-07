@@ -15,51 +15,51 @@ import java.util.stream.Collectors;
 @Service
 public class NoteServiceImpl implements NoteService {
 
-    private final NotesRepository noteRepository;
-    private final NoteMapper noteMapper;
+	private final NotesRepository noteRepository;
+	private final NoteMapper noteMapper;
 
-    public NoteServiceImpl(NotesRepository noteRepository, NoteMapper noteMapper) {
-        this.noteRepository = noteRepository;
-        this.noteMapper = noteMapper;
-    }
+	public NoteServiceImpl(NotesRepository noteRepository, NoteMapper noteMapper) {
+		this.noteRepository = noteRepository;
+		this.noteMapper = noteMapper;
+	}
 
-    @Override
-    public NoteDTO addNote(CreateModifyNoteDTO noteToAdd) {
-        NoteModel noteToSave = noteMapper.createModifyNoteDtoToEntity(noteToAdd);
-        return noteMapper.noteToNoteDTO(noteRepository.save(noteToSave));
-    }
+	@Override
+	public NoteDTO addNote(CreateModifyNoteDTO noteToAdd) {
+		NoteModel noteToSave = noteMapper.createModifyNoteDtoToEntity(noteToAdd);
+		return noteMapper.noteToNoteDTO(noteRepository.save(noteToSave));
+	}
 
-    @Override
-    public NoteDTO getNote(Long id) {
-        return noteMapper.noteToNoteDTO(getNoteById(id));
-    }
+	@Override
+	public NoteDTO getNote(Long id) {
+		return noteMapper.noteToNoteDTO(getNoteById(id));
+	}
 
-    @Override
-    public List<NoteDTO> getAllNotes() {
-        return noteRepository.findAll().stream()
-                .map(note -> noteMapper.noteToNoteDTO(note))
-                .collect(Collectors.toList());
-    }
+	@Override
+	public List<NoteDTO> getAllNotes() {
+		return noteRepository.findAll().stream()
+				.map(note -> noteMapper.noteToNoteDTO(note))
+				.collect(Collectors.toList());
+	}
 
-    @Override
-    public NoteDTO modifyNote(Long id, CreateModifyNoteDTO noteToModify) {
-        NoteModel noteToSave = getNoteById(id);
-        noteToSave.setTitle(noteToModify.getTitle());
-        noteToSave.setContent(noteToModify.getContent());
-        return noteMapper.noteToNoteDTO(noteRepository.save(noteToSave));
-    }
+	@Override
+	public NoteDTO modifyNote(Long id, CreateModifyNoteDTO noteToModify) {
+		NoteModel noteToSave = getNoteById(id);
+		noteToSave.setTitle(noteToModify.getTitle());
+		noteToSave.setContent(noteToModify.getContent());
+		return noteMapper.noteToNoteDTO(noteRepository.save(noteToSave));
+	}
 
-    @Override
-    public void removeNote(Long id) {
-        if (!noteRepository.existsById(id)) {
-            throw new NoteNotFoundException("Note with the specified ID is not present in the database.");
-        }
-        noteRepository.deleteById(id);
-    }
+	@Override
+	public void removeNote(Long id) {
+		if (!noteRepository.existsById(id)) {
+			throw new NoteNotFoundException("Note with the specified ID is not present in the database.");
+		}
+		noteRepository.deleteById(id);
+	}
 
-    private NoteModel getNoteById(Long id) {
-        return noteRepository.findById(id).orElseThrow(
-                () -> new NoteNotFoundException("Note with the specified ID is not present in the database.")
-        );
-    }
+	private NoteModel getNoteById(Long id) {
+		return noteRepository.findById(id).orElseThrow(
+				() -> new NoteNotFoundException("Note with the specified ID is not present in the database.")
+		);
+	}
 }

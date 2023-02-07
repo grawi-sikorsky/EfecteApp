@@ -12,16 +12,16 @@ import java.sql.Timestamp;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(NoteNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleNoteNotFound(NoteNotFoundException ex, HttpServletRequest httpRequest) {
-        ErrorResponse errorResponse = buildErrorResponse(ex.getMessage(), httpRequest, HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    }
+	@ExceptionHandler(NoteNotFoundException.class)
+	public ResponseEntity<ErrorResponse> handleNoteNotFound(NoteNotFoundException ex, HttpServletRequest httpRequest) {
+		ErrorResponse errorResponse = buildErrorResponse(ex.getMessage(), httpRequest, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+	}
 
-    public static ErrorResponse buildErrorResponse(String exceptionMessage, HttpServletRequest httpRequest, HttpStatus httpStatus) {
-        int status = httpStatus.value();
-        String error = httpStatus.getReasonPhrase();
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        return new ErrorResponse(timestamp, status, error, exceptionMessage, httpRequest.getRequestURI());
-    }
+	public static ErrorResponse buildErrorResponse(String exceptionMessage, HttpServletRequest httpRequest, HttpStatus httpStatus) {
+		int status = httpStatus.value();
+		String error = httpStatus.getReasonPhrase();
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		return new ErrorResponse(timestamp, status, error, exceptionMessage, httpRequest.getRequestURI());
+	}
 }

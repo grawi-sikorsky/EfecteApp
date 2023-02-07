@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface NoteService {
 
-    NoteDTO addNote(CreateModifyNoteDTO noteToAdd);
+	NoteDTO addNote(CreateModifyNoteDTO noteToAdd);
 
-    NoteDTO getNote(Long id);
+	NoteDTO getNote(Long id);
 
-    NoteDTO modifyNote(Long id, CreateModifyNoteDTO noteToModify);
+	NoteDTO modifyNote(Long id, CreateModifyNoteDTO noteToModify);
 
-    void removeNote(Long id);
+	void removeNote(Long id);
 
-    List<NoteDTO> getAllNotes();
+	List<NoteDTO> getAllNotes();
 }

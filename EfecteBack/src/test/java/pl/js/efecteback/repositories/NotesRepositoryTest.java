@@ -19,21 +19,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Sql(scripts = "classpath:sql/insert-dummy-notes.sql")
 class NotesRepositoryTest {
 
-    @Autowired
-    private NotesRepository notesRepository;
+	@Autowired
+	private NotesRepository notesRepository;
 
-    @Test
-    void findNoteModelById() {
-    }
+	@Test
+	void findNoteModelById() {
+	}
 
-    @Test
-    void findAll() {
-        List<NoteModel> foundNotes = notesRepository.findAll();
-        NoteModel note1 = foundNotes.get(0);
-        NoteModel note2 = foundNotes.get(1);
+	@Test
+	void findAll() {
+		List<NoteModel> foundNotes = notesRepository.findAll();
+		NoteModel note1 = foundNotes.get(0);
+		NoteModel note2 = foundNotes.get(1);
 
-        assertEquals(2, foundNotes.size());
-        assertEquals(10L, note1.getId());
-        assertEquals(20L, note2.getId());
-    }
+		assertEquals(2, foundNotes.size());
+		assertEquals(10L, note1.getId());
+		assertEquals(20L, note2.getId());
+	}
 }

@@ -18,29 +18,29 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @SpringBootTest
 class GlobalExceptionHandlerTest {
-    @Autowired
-    private GlobalExceptionHandler globalExceptionHandler;
+	@Autowired
+	private GlobalExceptionHandler globalExceptionHandler;
 
-    @Test
-    void handleNoteNotFound() {
-        String requestURI = "/notes/999";
-        String exceptionMsg = "NOT FOUND";
-        NoteNotFoundException exception = new NoteNotFoundException(exceptionMsg);
-        MockHttpServletRequest httpRequest = new MockHttpServletRequest(HttpMethod.GET.name(), requestURI);
+	@Test
+	void handleNoteNotFound() {
+		String requestURI = "/notes/999";
+		String exceptionMsg = "NOT FOUND";
+		NoteNotFoundException exception = new NoteNotFoundException(exceptionMsg);
+		MockHttpServletRequest httpRequest = new MockHttpServletRequest(HttpMethod.GET.name(), requestURI);
 
-        ResponseEntity<ErrorResponse> actualResponseEntity = globalExceptionHandler.handleNoteNotFound(exception, httpRequest);
+		ResponseEntity<ErrorResponse> actualResponseEntity = globalExceptionHandler.handleNoteNotFound(exception, httpRequest);
 
-        String expectedPath = httpRequest.getRequestURI();
-        ErrorResponse errorResponse = actualResponseEntity.getBody();
-        assertNotNull(errorResponse.getTimestamp());
-        assertEquals(expectedPath, errorResponse.getPath());
-        assertEquals(exception.getMessage(), errorResponse.getMessage());
-        assertEquals(NOT_FOUND.value(), errorResponse.getStatus());
-        assertEquals(NOT_FOUND, actualResponseEntity.getStatusCode());
-        assertEquals(NOT_FOUND.getReasonPhrase(), errorResponse.getError());
-    }
+		String expectedPath = httpRequest.getRequestURI();
+		ErrorResponse errorResponse = actualResponseEntity.getBody();
+		assertNotNull(errorResponse.getTimestamp());
+		assertEquals(expectedPath, errorResponse.getPath());
+		assertEquals(exception.getMessage(), errorResponse.getMessage());
+		assertEquals(NOT_FOUND.value(), errorResponse.getStatus());
+		assertEquals(NOT_FOUND, actualResponseEntity.getStatusCode());
+		assertEquals(NOT_FOUND.getReasonPhrase(), errorResponse.getError());
+	}
 
-    @Test
-    void buildErrorResponse() {
-    }
+	@Test
+	void buildErrorResponse() {
+	}
 }
