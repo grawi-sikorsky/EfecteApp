@@ -25,11 +25,9 @@ export class NoteComponent {
     if (this.isEditMode && this.editingNoteId === note.id) {
       this.isEditMode = false;
       this.editingNoteId = 0;
-      this.getNote(note.id);
     } else {
       this.isEditMode = true;
       this.editingNoteId = note.id;
-      this.getNote(note.id);
     }
   }
 
@@ -40,6 +38,7 @@ export class NoteComponent {
   public editNote(note: NoteDTO) {
     this.noteService.editNote(note).subscribe(data => {
       this.enterEditMode(note);
+      this.getNote(note.id);
     });
   }
 
