@@ -1,15 +1,15 @@
 # EfecteApp
 1. To deploy application locally:
-    - create .env file in /docker/dev/ catalog, basing on following template:
+    - create .env file in /docker/dev/ catalog, basing on following template:<br><br>
 
-        MYSQL_NAME=efectenotes
-        MYSQL_ROOT_USER=root
-        MYSQL_ROOT_PASSWORD=rootpass
-        MYSQL_DATABASE=efectenotes
-        MYSQL_USER=test
-        MYSQL_PASSWORD=test
+        MYSQL_NAME=efectenotes<br>
+        MYSQL_ROOT_USER=root<br>
+        MYSQL_ROOT_PASSWORD=rootpass<br>
+        MYSQL_DATABASE=efectenotes<br>
+        MYSQL_USER=test<br>
+        MYSQL_PASSWORD=test<br><br>
 
-        change your credentials if you like to
+        change your credentials if you like to<br><br>
 
     - RUN command "docker-compose up" on /docker/dev/ path to create and run containers in docker
     - Frontend will be available on http://localhost, backend on http://localhost:8080.
