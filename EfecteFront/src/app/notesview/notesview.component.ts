@@ -48,7 +48,7 @@ export class NotesviewComponent {
   }
 
   removeChildNote(note: NoteDTO) {
-    const index = this.allNotes.indexOf(note, 0);
+    const index = this.allNotes.findIndex( el => el.id === note.id);
     if (index > -1) {
       this.allNotes.splice(index, 1);
     }
