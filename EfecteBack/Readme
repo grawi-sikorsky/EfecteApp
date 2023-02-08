@@ -20,5 +20,3 @@
     - od specify environment variables
     - vscode -> create/modify "launch.json" and add line:
        "envFile": "${workspaceFolder}/docker/dev/.env"
-
-
