@@ -35,6 +35,11 @@ export class NoteComponent {
     return this.isEditMode && this.editingNoteId === note.id;
   }
 
+  public cancelEdit(note: NoteDTO){
+    this.enterEditMode(note);
+    this.getNote(note.id);
+  }
+
   public editNote(note: NoteDTO) {
     this.noteService.editNote(note).subscribe(data => {
       this.enterEditMode(note);
